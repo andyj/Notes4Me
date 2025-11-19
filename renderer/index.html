@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <title>Meeting Recorder - Settings</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h1>Meeting Recorder Settings</h1>
+      <p class="subtitle">Configure your recording and processing preferences</p>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Status Section -->
+      <section class="section">
+        <h2>System Status</h2>
+        <div class="status-grid">
+          <div class="status-item">
+            <span class="status-icon" id="status-sox">⏳</span>
+            <div class="status-info">
+              <strong>sox</strong>
+              <small>Audio Recording</small>
+            </div>
+          </div>
+          <div class="status-item">
+            <span class="status-icon" id="status-whisper">⏳</span>
+            <div class="status-info">
+              <strong>whisper.cpp</strong>
+              <small>Transcription</small>
+            </div>
+          </div>
+          <div class="status-item">
+            <span class="status-icon" id="status-ollama">⏳</span>
+            <div class="status-info">
+              <strong>Ollama</strong>
+              <small>AI Summarization</small>
+            </div>
+          </div>
+          <div class="status-item">
+            <span class="status-icon" id="status-blackhole">⏳</span>
+            <div class="status-info">
+              <strong>BlackHole</strong>
+              <small>System Audio</small>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-secondary" id="btn-refresh-deps">Refresh Status</button>
+      </section>
+
+      <!-- General Settings -->
+      <section class="section">
+        <h2>General Settings</h2>
+
+        <div class="form-group">
+          <label for="output-directory">
+            Output Directory
+            <small>Where recordings and notes are saved</small>
+          </label>
+          <div class="input-with-button">
+            <input type="text" id="output-directory" readonly>
+            <button class="btn btn-secondary" id="btn-change-dir">Change</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="retention-days">
+            Retention Period (days)
+            <small>WAV files older than this will be deleted automatically</small>
+          </label>
+          <div class="input-with-slider">
+            <input type="range" id="retention-days" min="1" max="30" step="1">
+            <span id="retention-days-value">7 days</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="auto-process">
+            <span>
+              Auto-process recordings
+              <small>Automatically transcribe and generate notes after recording</small>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Recordings List -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Recordings</h2>
+          <button class="btn btn-secondary" id="btn-refresh-list">Refresh</button>
+        </div>
+
+        <div class="recordings-list" id="recordings-list">
+          <div class="loading">Loading recordings...</div>
+        </div>
+      </section>
+
+      <!-- Storage Info -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Storage</h2>
+          <button class="btn btn-secondary" id="btn-cleanup">Cleanup Old Files</button>
+        </div>
+
+        <div class="storage-stats">
+          <div class="stat-item">
+            <span class="stat-label">Total Size:</span>
+            <span class="stat-value" id="stat-total-size">-</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Recordings:</span>
+            <span class="stat-value" id="stat-recordings">-</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Transcripts:</span>
+            <span class="stat-value" id="stat-transcripts">-</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Notes:</span>
+            <span class="stat-value" id="stat-notes">-</span>
+          </div>
+        </div>
+
+        <button class="btn btn-secondary" id="btn-open-output">Open Output Folder</button>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <span id="version">v1.0.0</span>
+        <div class="footer-buttons">
+          <button class="btn btn-secondary" id="btn-reset-settings">Reset to Defaults</button>
+          <button class="btn btn-primary" id="btn-save">Save Changes</button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Processing Overlay -->
+  <div id="processing-overlay" class="overlay hidden">
+    <div class="overlay-content">
+      <div class="spinner"></div>
+      <h3 id="processing-stage">Processing...</h3>
+      <p id="processing-message">Please wait...</p>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <span id="processing-percent">0%</span>
+    </div>
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

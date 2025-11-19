@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Electron build output
+dist/
+out/
+build/
+
+# Recording data (do not commit)
+recordings/
+processed/
+temp/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Whisper models (large files)
+models/*.bin
+
+# Testing
+coverage/
+.nyc_output/
+
+# Development notes & nested repos
+_devnotes/
+whisper.cpp/
+
+# Random
+.history
+CLAUDE.md
+AGENTS.md

@@ -1,0 +1,47 @@
+{
+  "name": "meeting-recorder",
+  "version": "1.0.0",
+  "description": "Privacy-focused meeting recorder with AI transcription",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "keywords": [
+    "meeting",
+    "recorder",
+    "transcription",
+    "ai",
+    "privacy"
+  ],
+  "author": "Andy Jarrett",
+  "license": "MIT",
+  "dependencies": {
+    "electron-store": "^8.2.0"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.meetingrecorder.app",
+    "productName": "Meeting Recorder",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "assets/icon.png",
+      "hardenedRuntime": true,
+      "entitlements": "entitlements.mac.plist"
+    },
+    "files": [
+      "**/*",
+      "!**/*.md",
+      "!.gitignore",
+      "!_files"
+    ]
+  }
+}

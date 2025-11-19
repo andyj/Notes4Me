@@ -1,0 +1,44 @@
+Business Source License 1.1 Notes4Me
+
+Licensor: Andy Jarrett
+
+Licensed Work: Notes4Me, including all source code in this repository.
+Change Date: 31 December 2031 Change License: Apache License 2.0
+
+1.  Grant of Rights
+
+You may use, copy, modify and distribute the Licensed Work for
+non-commercial purposes. Non-commercial means personal use or internal
+use inside an organisation, with no direct or indirect payment, sale, or
+commercial advantage.
+
+Any commercial use, including selling, hosting, offering paid services,
+or bundling the Licensed Work into a commercial product, requires prior
+written permission from the Licensor.
+
+2.  Additional Use Grants
+
+You may develop extensions, modifications or add-ons. These must follow
+the same non-commercial rule unless you receive commercial permission.
+
+3.  Redistribution
+
+You may redistribute the Licensed Work or your changes provided you
+include:
+
+-   This licence
+-   A notice of your changes
+-   A copy of the Apache 2.0 licence (which the project will switch to
+    on the Change Date)
+
+4.  Change Date
+
+On the Change Date, the Licensed Work will automatically switch to the
+Apache License 2.0, and you may then use it under the Apache terms. This
+does not apply retroactively to earlier versions before the Change Date.
+
+5.  Disclaimer
+
+The Licensed Work is provided “as is”, without warranty of any kind. The
+Licensor is not liable for any damages arising from the use of the
+Licensed Work.

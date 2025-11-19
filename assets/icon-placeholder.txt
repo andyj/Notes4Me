@@ -1,0 +1,17 @@
+PLACEHOLDER ICONS
+
+For production, replace these with actual PNG icons:
+
+icon.png - 16x16 or 22x22 px (idle state - microphone icon)
+icon@2x.png - 32x32 or 44x44 px (Retina - idle)
+icon-recording.png - 16x16 or 22x22 px (recording state - red dot or active mic)
+icon-recording@2x.png - 32x32 or 44x44 px (Retina - recording)
+
+For now, we'll create simple template icons programmatically in the main process.
+
+You can create icons using:
+- SF Symbols (macOS built-in)
+- Figma/Sketch
+- Icon generators
+
+Recommended style: Simple, monochrome, works well at small sizes
