@@ -70,6 +70,11 @@ async function loadDependencies() {
     updateStatusIcon('status-whisper', deps.whisper);
     updateStatusIcon('status-ollama', deps.ollama);
     updateStatusIcon('status-blackhole', deps.blackhole);
+
+    // If Ollama is still checking (null), re-check after 2 seconds
+    if (deps.ollama === null) {
+      setTimeout(() => loadDependencies(), 2000);
+    }
   } catch (err) {
     console.error('Failed to check dependencies:', err);
   }
@@ -181,11 +186,18 @@ function renderRecordingItem(rec) {
   `;
 }
 
-function updateStatusIcon(elementId, isOk) {
+function updateStatusIcon(elementId, status) {
   const element = document.getElementById(elementId);
   if (!element) return;
 
-  element.textContent = isOk ? '✅' : '❌';
+  // Handle three states: true (available), false (unavailable), null (checking)
+  if (status === null || status === undefined) {
+    element.textContent = '⏳';
+  } else if (status === true) {
+    element.textContent = '✅';
+  } else {
+    element.textContent = '❌';
+  }
 }
 
 function updateRetentionLabel(days) {
