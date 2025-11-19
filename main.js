@@ -52,7 +52,7 @@ function checkDependencies() {
   const status = {
     sox: false,
     whisper: false,
-    ollama: false,
+    ollama: null, // null = checking, true = available, false = unavailable
     lastChecked: Date.now()
   };
 
@@ -113,7 +113,7 @@ function checkDependencies() {
   console.log('\n=== Dependency Check Summary ===');
   console.log(`sox:     ${status.sox ? '✅' : '❌'}`);
   console.log(`whisper: ${status.whisper ? '✅' : '❌'}`);
-  console.log(`ollama:  ${status.ollama ? '⏳ checking...' : '❌'}`);
+  console.log(`ollama:  ${status.ollama === null ? '⏳ checking...' : (status.ollama ? '✅' : '❌')}`);
   console.log('================================\n');
 
   dependenciesStatus = status;
