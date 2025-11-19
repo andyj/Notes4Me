@@ -1,6 +1,6 @@
 # Notes4Me
 
-> A privacy-focused macOS menu bar application for recording, transcribing, and summarizing meetings using local AI processing.
+> A privacy-focused macOS menu bar application for recording, transcribing, and summarising meetings using local AI processing.
 
 **All data stays on your machine—no cloud uploads, no subscriptions, no privacy compromises.**
 
@@ -36,6 +36,7 @@
 Notes4Me is a macOS menu bar application designed for professionals who want to record and transcribe meetings without compromising privacy. Unlike cloud-based solutions, all processing happens locally on your Mac using state-of-the-art open-source AI models.
 
 **What makes Notes4Me different:**
+
 - ✅ **Privacy-First**: Zero data leaves your machine
 - ✅ **Cost-Effective**: No subscription fees or per-minute charges
 - ✅ **Powerful**: Uses the same AI models as paid services
@@ -49,7 +50,7 @@ Notes4Me is a macOS menu bar application designed for professionals who want to 
 ### Core Functionality
 - **Audio Recording**: Captures system audio from any application (Zoom, Google Meet, Microsoft Teams, etc.)
 - **Speech-to-Text**: Converts recordings to accurate text transcripts using whisper.cpp
-- **AI Summarization**: Generates structured meeting notes with:
+- **AI Summarisation**: Generates structured meeting notes with:
   - Action items and owners
   - Key takeaways
   - Meeting purpose and context
@@ -59,7 +60,7 @@ Notes4Me is a macOS menu bar application designed for professionals who want to 
 ### User Experience
 - **Menu Bar Integration**: Lightweight tray app that's always accessible
 - **One-Click Recording**: Start/stop recording with a single click
-- **Automatic Processing**: Optionally transcribe and summarize recordings automatically
+- **Automatic Processing**: Optionally transcribe and summarise recordings automatically
 - **Settings UI**: Modern, dark-mode-enabled interface for configuration
 - **File Management**: Automatic cleanup of old recordings with configurable retention (1-30 days)
 - **Storage Tracking**: Monitor disk usage for recordings, transcripts, and notes
@@ -67,7 +68,7 @@ Notes4Me is a macOS menu bar application designed for professionals who want to 
 ### Privacy & Performance
 - **100% Local Processing**: No cloud APIs, no external services
 - **Fast Transcription**: ~5x real-time on Apple Silicon (M1/M2/M3)
-- **Efficient Summarization**: 2-3 minutes for typical meetings
+- **Efficient Summarisation**: 2-3 minutes for typical meetings
 - **Secure by Design**: Electron security best practices with sandboxed renderer
 
 ---
@@ -90,7 +91,7 @@ Notes4Me uses a three-stage pipeline to transform raw audio into actionable meet
          │
          ▼
 ┌─────────────────┐
-│ 3. Summarization│  Ollama (llama3.2) generates structured notes
+│ 3. Summarisation│  Ollama (llama3.2) generates structured notes
 │   (2-3 minutes) │  Saves to: ~/Documents/MeetingRecordings/processed/
 └─────────────────┘
 ```
@@ -99,7 +100,7 @@ Notes4Me uses a three-stage pipeline to transform raw audio into actionable meet
 - **Electron 33.x**: Cross-platform desktop framework
 - **sox**: Reliable audio recording utility
 - **whisper.cpp**: Fast, local speech recognition (from OpenAI's Whisper model)
-- **Ollama**: Local LLM runtime for AI summarization
+- **Ollama**: Local LLM runtime for AI summarisation
 - **BlackHole**: Virtual audio device for system audio capture
 
 ---
@@ -315,7 +316,7 @@ This is the most critical step for recording system audio. You need to create a 
 
 #### Step 7: Start Ollama and Download the AI Model
 
-Ollama is the local LLM runtime that powers meeting summarization.
+Ollama is the local LLM runtime that powers meeting summarisation.
 
 **Start Ollama server:**
 ```bash
@@ -562,13 +563,13 @@ Open settings by clicking the menu bar icon → **"Settings..."**
 #### Settings Tab
 - **Output Directory**: Change where recordings are saved (default: `~/Documents/MeetingRecordings`)
 - **Retention Period**: How many days to keep recordings (1-30 days, default: 7)
-- **Auto-Process**: Automatically transcribe and summarize after recording stops
+- **Auto-Process**: Automatically transcribe and summarise after recording stops
 
 #### Recordings Tab
 - View all recordings with metadata (date, size, processing status)
 - Actions per recording:
   - 📂 **Open**: View in Finder
-  - ⚙️ **Process**: Manually transcribe/summarize
+  - ⚙️ **Process**: Manually transcribe/summarise
   - 🗑️ **Delete**: Remove recording and associated files
 
 #### Storage Tab
@@ -583,7 +584,7 @@ Open settings by clicking the menu bar icon → **"Settings..."**
 
 ### Benchmarks (M1 MacBook Air, 8GB RAM)
 
-| Recording Length | Transcription Time | Summarization Time | Total Processing Time |
+| Recording Length | Transcription Time | Summarisation Time | Total Processing Time |
 |-----------------|-------------------|-------------------|----------------------|
 | 15 minutes      | ~3 minutes        | ~1.5 minutes      | ~4.5 minutes         |
 | 30 minutes      | ~6 minutes        | ~2 minutes        | ~8 minutes           |
@@ -591,9 +592,9 @@ Open settings by clicking the menu bar icon → **"Settings..."**
 
 ### Performance Notes
 - **Transcription**: whisper.cpp base.en model processes at ~5x real-time on Apple Silicon
-- **Summarization**: llama3.2 generates ~50 tokens/second
+- **Summarisation**: llama3.2 generates ~50 tokens/second
 - **Processing**: Runs in background, doesn't block other work
-- **Memory**: ~2GB RAM during transcription, ~4GB during summarization
+- **Memory**: ~2GB RAM during transcription, ~4GB during summarisation
 
 ### Optimization Tips
 - **Use base.en model**: Faster than multilingual models, sufficient for English
@@ -729,7 +730,7 @@ cd ..
 
 ---
 
-### Summarization Issues
+### Summarisation Issues
 
 #### "Ollama not available"
 ```bash
@@ -755,7 +756,7 @@ ollama pull llama3.2
 ollama list | grep llama3.2
 ```
 
-#### "Summarization fails or produces gibberish"
+#### "Summarisation fails or produces gibberish"
 **Possible causes:**
 1. Empty or very short transcript
 2. Ollama out of memory
@@ -937,10 +938,10 @@ cd whisper.cpp
 
 ---
 
-### Summarization
+### Summarisation
 
 **Q: Can I customize the summary format?**
-A: Yes! Edit the prompt in `services/summarizer.js` (line ~60) to change the structure, add custom sections, or adjust tone.
+A: Yes! Edit the prompt in `services/summariser.js` (line ~60) to change the structure, add custom sections, or adjust tone.
 
 **Q: Can I use a different AI model?**
 A: Yes! Notes4Me works with any Ollama-compatible model:
@@ -948,10 +949,10 @@ A: Yes! Notes4Me works with any Ollama-compatible model:
 ollama pull mistral        # Faster, less detailed
 ollama pull llama3.1:70b   # Slower, more detailed (requires 64GB+ RAM)
 ```
-Then update `services/summarizer.js` to use your preferred model.
+Then update `services/summariser.js` to use your preferred model.
 
 **Q: Do summaries include speaker identification?**
-A: Not currently. Whisper doesn't do speaker diarization. This is a planned feature.
+A: Not currently. Whisper doesn't do speaker diarisation. This is a planned feature.
 
 ---
 
@@ -1012,7 +1013,7 @@ Notes4Me/
 ├── services/               # Core business logic
 │   ├── recorder.js         #  - Audio capture via sox
 │   ├── transcriber.js      #  - whisper.cpp integration
-│   ├── summarizer.js       #  - Ollama API client
+│   ├── summariser.js       #  - Ollama API client
 │   └── fileManager.js      #  - File operations & cleanup
 │
 ├── utils/                  # Utilities
@@ -1058,13 +1059,13 @@ rm -rf dist/ build/ out/
 #### Main Process (main.js)
 - **Tray Icon**: Creates menu bar icon and context menu
 - **IPC Handlers**: Responds to renderer requests (startRecording, stopRecording, etc.)
-- **Pipeline Orchestration**: Chains recorder → transcriber → summarizer
+- **Pipeline Orchestration**: Chains recorder → transcriber → summariser
 - **Window Management**: Creates and manages settings window
 
 #### Services Layer
 - **Recorder**: Spawns sox subprocess, monitors file size, handles cleanup
 - **Transcriber**: Spawns whisper.cpp, parses progress, returns transcript path
-- **Summarizer**: Streams from Ollama API, formats markdown output
+- **Summariser**: Streams from Ollama API, formats markdown output
 - **FileManager**: CRUD operations, retention policy, storage stats
 
 #### Renderer Process (renderer/)
@@ -1106,7 +1107,7 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 
 **Areas for contribution:**
 - Windows/Linux support
-- Speaker diarization (who said what)
+- Speaker diarisation (who said what)
 - Real-time transcription
 - Custom AI prompts
 - Export formats (PDF, DOCX)
@@ -1117,7 +1118,7 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/my-feature`
 3. Make changes and test thoroughly
-4. Commit with clear messages: `git commit -m "Add speaker diarization"`
+4. Commit with clear messages: `git commit -m "Add speaker diarisation"`
 5. Push and create a Pull Request
 
 ---
@@ -1164,7 +1165,7 @@ This project stands on the shoulders of giants:
 ## Changelog
 
 ### v1.0.0 (Initial Release)
-- Core recording, transcription, and summarization pipeline
+- Core recording, transcription, and summarisation pipeline
 - macOS menu bar integration
 - Settings UI with dark mode
 - Automatic file cleanup
