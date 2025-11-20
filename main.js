@@ -903,9 +903,25 @@ ipcMain.handle('system:openOutputDir', async () => {
  * App lifecycle: Ready
  */
 app.whenReady().then(() => {
-  console.log('Meeting Recorder starting...');
+  console.log('Notes4Me starting...');
   console.log(`Electron version: ${process.versions.electron}`);
   console.log(`Node version: ${process.versions.node}`);
+
+  // Set dock icon (macOS only)
+  if (process.platform === 'darwin' && app.dock) {
+    const iconPath = path.join(__dirname, 'assets', 'icon.png');
+    if (fs.existsSync(iconPath)) {
+      try {
+        const icon = nativeImage.createFromPath(iconPath);
+        app.dock.setIcon(icon);
+        console.log('✅ Dock icon set');
+      } catch (err) {
+        console.warn('⚠️  Failed to set dock icon:', err.message);
+      }
+    } else {
+      console.warn('⚠️  Icon file not found. Create assets/icon.png following ICON_INSTRUCTIONS.md');
+    }
+  }
 
   // Initialize recorder and tray
   initRecorder();
