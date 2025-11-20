@@ -1090,16 +1090,56 @@ npm start
 
 ### Creating a Distribution Build
 
+#### Local Build
+
 ```bash
 npm run build
 ```
 
 This uses electron-builder to create a macOS .app bundle in `dist/`.
 
+**Output:**
+- `dist/Notes4Me-1.0.0-arm64.dmg` - DMG installer (~222MB)
+- `dist/Notes4Me-1.0.0-arm64-mac.zip` - ZIP archive (~218MB)
+
 **Customization:**
 - Edit `package.json` → `build` section for app metadata
 - Add app icon: `assets/icon.png` (1024x1024px)
 - Code signing: Set `APPLE_ID` and `APPLE_ID_PASSWORD` environment variables
+
+#### Automated Builds (GitHub Actions)
+
+Every push to `main` automatically builds the app using GitHub Actions:
+
+**What happens:**
+1. Code is pushed to GitHub
+2. GitHub Actions runner (macOS) checks out code
+3. Installs Node.js dependencies
+4. Runs `npm run build`
+5. Uploads DMG and ZIP as downloadable artifacts
+
+**Download builds:**
+- Go to: https://github.com/andyj/Notes4Me/actions
+- Click on latest workflow run
+- Download artifacts from the "Artifacts" section
+- Artifacts are kept for 30 days
+
+**Creating releases:**
+To create a GitHub Release with downloadable installers:
+
+```bash
+# Tag a release
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+This will:
+- Build the app automatically
+- Create a GitHub Release at https://github.com/andyj/Notes4Me/releases
+- Attach DMG and ZIP files to the release
+- Generate release notes from commits
+
+**Workflow file:** `.github/workflows/build.yml`
 
 ### Contributing
 
