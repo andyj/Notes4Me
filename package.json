@@ -1,7 +1,7 @@
 {
-  "name": "meeting-recorder",
+  "name": "notes4me",
   "version": "1.0.0",
-  "description": "Privacy-focused meeting recorder with AI transcription",
+  "description": "Privacy-focused meeting recorder with AI transcription and summarization",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -13,7 +13,9 @@
     "recorder",
     "transcription",
     "ai",
-    "privacy"
+    "privacy",
+    "notes",
+    "summarization"
   ],
   "author": "Andy Jarrett",
   "license": "MIT",
@@ -25,8 +27,8 @@
     "electron-builder": "^24.13.3"
   },
   "build": {
-    "appId": "com.meetingrecorder.app",
-    "productName": "Meeting Recorder",
+    "appId": "com.andyjarrett.notes4me",
+    "productName": "Notes4Me",
     "mac": {
       "category": "public.app-category.productivity",
       "target": [
@@ -41,7 +43,8 @@
       "**/*",
       "!**/*.md",
       "!.gitignore",
-      "!_files"
+      "!_devnotes",
+      "!whisper.cpp"
     ]
   }
 }
