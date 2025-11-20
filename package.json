@@ -29,6 +29,7 @@
   "build": {
     "appId": "com.andyjarrett.notes4me",
     "productName": "Notes4Me",
+    "publish": null,
     "mac": {
       "category": "public.app-category.productivity",
       "target": [

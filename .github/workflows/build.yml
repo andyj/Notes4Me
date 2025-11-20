@@ -49,6 +49,8 @@ jobs:
         env:
           # Skip code signing (requires Apple Developer account)
           CSC_IDENTITY_AUTO_DISCOVERY: false
+          # Disable auto-publish (we'll publish manually on tags)
+          ELECTRON_BUILDER_PUBLISH: never
 
       - name: List build artifacts
         if: always()
