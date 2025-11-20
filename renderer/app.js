@@ -175,7 +175,7 @@ function renderRecordingItem(rec) {
       </div>
       <div class="recording-badges">
         ${rec.transcribed ? '<span class="badge badge-success">Transcribed</span>' : '<span class="badge badge-warning">Not transcribed</span>'}
-        ${rec.summarized ? '<span class="badge badge-success">Summarized</span>' : ''}
+        ${rec.summarised ? '<span class="badge badge-success">Summarised</span>' : ''}
       </div>
       <div class="recording-actions">
         <button class="icon-btn" id="open-${index}" title="Open file">📂</button>

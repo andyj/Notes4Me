@@ -1,12 +1,13 @@
 {
   "name": "notes4me",
   "version": "1.0.0",
-  "description": "Privacy-focused meeting recorder with AI transcription and summarization",
+  "description": "Privacy-focused meeting recorder with AI transcription and summarisation",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "summaryonly": "node summarise-only.js"
   },
   "keywords": [
     "meeting",
@@ -15,7 +16,7 @@
     "ai",
     "privacy",
     "notes",
-    "summarization"
+    "summarisation"
   ],
   "author": "Andy Jarrett",
   "license": "MIT",

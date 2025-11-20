@@ -46,7 +46,7 @@ contextBridge.exposeInMainWorld('meetingRecorder', {
 
   /**
    * List all recordings
-   * @returns {Promise<Array<{filename: string, size: number, created: Date, transcribed: boolean, summarized: boolean}>>}
+   * @returns {Promise<Array<{filename: string, size: number, created: Date, transcribed: boolean, summarised: boolean}>>}
    */
   listRecordings: () => ipcRenderer.invoke('files:list'),
 
@@ -92,10 +92,10 @@ contextBridge.exposeInMainWorld('meetingRecorder', {
    * @param {string} transcriptPath - Path to transcript file
    * @returns {Promise<{success: boolean, notesPath?: string, error?: string}>}
    */
-  generateNotes: (transcriptPath) => ipcRenderer.invoke('process:summarize', transcriptPath),
+  generateNotes: (transcriptPath) => ipcRenderer.invoke('process:summarise', transcriptPath),
 
   /**
-   * Process a recording (transcribe + summarize)
+   * Process a recording (transcribe + summarise)
    * @param {string} wavPath - Path to WAV file
    * @returns {Promise<{success: boolean, transcriptPath?: string, notesPath?: string, error?: string}>}
    */

@@ -6,7 +6,7 @@ const { execSync } = require('child_process');
 
 const Recorder = require('./services/recorder');
 const { transcribe, verifyInstallation: verifyWhisper } = require('./services/transcriber');
-const { generateNotes, checkOllamaHealth } = require('./services/summarizer');
+const { generateNotes, checkOllamaHealth } = require('./services/summariser');
 const { ensureDirectoryStructure, cleanupOldRecordings, getStorageStats } = require('./services/fileManager');
 
 // Persistent config store
@@ -655,7 +655,7 @@ ipcMain.handle('files:list', async () => {
           created: stats.birthtime,
           modified: stats.mtime,
           transcribed: fs.existsSync(transcriptPath),
-          summarized: fs.existsSync(notesPath)
+          summarised: fs.existsSync(notesPath)
         };
       })
       .sort((a, b) => b.created - a.created); // Newest first
@@ -780,13 +780,13 @@ ipcMain.handle('process:transcribe', async (event, wavPath) => {
   }
 });
 
-ipcMain.handle('process:summarize', async (event, transcriptPath) => {
+ipcMain.handle('process:summarise', async (event, transcriptPath) => {
   try {
     const notesPath = await generateNotes(transcriptPath, (bytesWritten) => {
       // Send progress updates to renderer
       if (BrowserWindow.getAllWindows().length > 0 && bytesWritten % 100 === 0) {
         BrowserWindow.getAllWindows()[0].webContents.send('processing:progress', {
-          stage: 'summarization',
+          stage: 'summarisation',
           progress: Math.floor(bytesWritten / 100),
           message: `Generating notes... (${Math.floor(bytesWritten / 100)} chars)`
         });
@@ -795,7 +795,7 @@ ipcMain.handle('process:summarize', async (event, transcriptPath) => {
 
     return { success: true, notesPath };
   } catch (err) {
-    console.error('IPC process:summarize failed:', err);
+    console.error('IPC process:summarise failed:', err);
     return { success: false, error: err.message };
   }
 });
@@ -819,7 +819,7 @@ ipcMain.handle('process:full', async (event, wavPath) => {
     const notesPath = await generateNotes(transcriptPath, (bytesWritten) => {
       if (BrowserWindow.getAllWindows().length > 0 && bytesWritten % 100 === 0) {
         BrowserWindow.getAllWindows()[0].webContents.send('processing:progress', {
-          stage: 'summarization',
+          stage: 'summarisation',
           progress: Math.floor(bytesWritten / 100),
           message: `Generating notes...`
         });
