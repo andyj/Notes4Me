@@ -149,22 +149,47 @@ function initRecorder() {
 }
 
 /**
- * Create menu bar tray icon
+ * Create a simple icon image with white background
  */
-function createTray() {
-  // Create a simple 16x16 transparent PNG for the tray icon
-  // This is a minimal valid PNG (1x1 transparent pixel, will be resized)
-  const transparentPng = Buffer.from(
-    'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+function createIconImage() {
+  // Create a white circle icon as base64 PNG (32x32)
+  // This is a white circle on transparent background
+  const whiteCirclePng = Buffer.from(
+    'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA' +
+    'dwAAAHcBx6XUPAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPHSURBVFiFvZdL' +
+    'aBNRFIa/mUknmUmbPJo0TZM2rY1aqFgRBBdCcSG4cePGhQs3uqiLghtBXIkLwY1YEXQhCC4EF4IIQRBC' +
+    'UKQqraLWR2rTJk2TNk3zfMzMdVFbYjLJJBb8YWDmnHv+j3Pu3HsF/5MkSfobuAZ0As1ADfADKAA54A3w' +
+    'RJblpf9CQPgL8RvAGWAb4PiHMQrwGLghy/JXPQL/JH4JuA5EtxivBm4Cl2VZVjcjIC4SHwcuapy/Clyy' +
+    'WCyMjo6Sy+WoVCqEQiGi0SjJZBK32w3AHeBcPfE1AuIi8VngPIDX62VwcJBkMklTUxPBYBCHw0GxWCSd' +
+    'TjM3N8f8/DyVSgWAOeCgLMsL6wSExMXi48BpgJ6eHk6dOkU8HtdU+ObNG+bm5lhcXGR5eRmAb8AeWZY/' +
+    '/hYQEheLTwEHALq7uzl+/Djt7e2ahVer1VhYWOD9+/fMzs4CUAGOybI8vVZASFws/gToB+ju7ubYsWN0' +
+    'dHTQCEqlEtPT07x9+5ZPnz4BfAcOybL8BiohcbH4B6APoKuri4GBAXbt2kVzc/Om51+tVpmdneX169d8' +
+    '/vwZ4CtwUJblD0LiYvH3QB9AKpVi//79JBIJbDbbX01cLpeZmZlhamoKWZYBPgD7ZFkuCImLxd8BuwEC' +
+    'gQD9/f309fXh9Xo3JbC8vMz09DSTk5OsrKwAFIBuWZbfCYmLxd8CXQAtLS3s3buX3bt34/F4NiWQz+d5' +
+    '+fIlk5OTlEolgA/AblmW3wuJi8VfA50APp+Pnp4eent7cblcmxLI5XK8ePGCN2/eUC6XAT4Cu2VZ/iQk' +
+    'LhZ/AXQAmM1mduzYQXd3N263e1MC2WyW58+fMzMzQ61WA/gM7JJl+bOQuFj8GdAOYDKZ2L59O7t376a1' +
+    'tXVTAgsLC0xMTPD27Vv0ej3AF2CXLMtfhMTF4k+BFIDRaKS9vZ2uri6SyeSmBBYXF3n27Bnv3r1Dr9cD' +
+    'fAW6ZFn+JiQuFn8MJAGMRiPJZJJUKkUikcBoNDYkUCgUePr0KR8/fkSv16PRUL4DKVmWvwuJi8UnQBJA' +
+    'r9eTSCRIpVJs27ZNU/y3BJ48ecL169cpFosApVqtlpJl+YeQuFh8HOgB0Ol0xONxUqkUra2tmuK/JfD4' +
+    '8WOuXbvGr1+/AAqyLO8REheLPwI6AXQ6HbFYjFQqRSwW0xT/LYEHDx5w9epVisUiQE6W5T1C4mLxh0AH' +
+    'gF6vJxqN0tnZSTwe1xT/LYF79+5x+fJlCoUCQFaW5b1C4mLx+0AKwGAw0NraSiqVIhqNaor/Nzs7C0BW' +
+    'luX9QuJi8XtAO4DRaCQSidDZ2UkkEtEU/5/8BhQtkX5GVVf+AAAAAElFTkSuQmCC',
     'base64'
   );
 
-  const icon = nativeImage.createFromBuffer(transparentPng);
+  return nativeImage.createFromBuffer(whiteCirclePng);
+}
+
+/**
+ * Create menu bar tray icon
+ */
+function createTray() {
+  const icon = createIconImage();
   tray = new Tray(icon);
 
   // Use text/emoji as the visible icon (works reliably on macOS)
-  tray.setTitle('🎙️');
-  tray.setToolTip('Meeting Recorder');
+  tray.setTitle('🤖✏️');
+  tray.setToolTip('Notes4Me');
 
   updateTrayMenu();
 }
@@ -304,8 +329,8 @@ function handleStartRecording() {
     currentRecordingPath = result.filepath;
     console.log(`Recording started: ${currentRecordingPath}`);
 
-    // Update tray icon to recording state (using a different emoji for now)
-    tray.setTitle('🔴');
+    // Update tray icon to recording state
+    tray.setTitle('🤖🔴');
 
     // Update menu every second to show elapsed time
     statusUpdateInterval = setInterval(() => {
@@ -360,7 +385,7 @@ async function handleStopRecording() {
     console.log(`Size: ${(result.size / (1024 * 1024)).toFixed(2)} MB`);
 
     // Reset tray icon to idle state
-    tray.setTitle('🎙️');
+    tray.setTitle('🤖✏️');
 
     // Clear status update interval
     if (statusUpdateInterval) {
@@ -419,7 +444,7 @@ async function processRecording(wavPath, duration) {
     console.log(`✅ Note generation complete: ${notesPath}`);
 
     // Reset tooltip
-    tray.setToolTip('Meeting Recorder');
+    tray.setToolTip('Notes4Me');
 
     // Show completion notification
     console.log('🎉 Processing complete! Transcript and notes are ready.');
@@ -433,7 +458,7 @@ async function processRecording(wavPath, duration) {
 
   } catch (err) {
     console.error('Processing failed:', err);
-    tray.setToolTip('Meeting Recorder');
+    tray.setToolTip('Notes4Me');
 
     // Show error notification
     tray.displayBalloon({
@@ -580,7 +605,7 @@ ipcMain.handle('recording:start', async () => {
       console.warn(warning);
     });
     currentRecordingPath = result.filepath;
-    tray.setTitle('🔴');
+    tray.setTitle('🤖🔴');
     updateTrayMenu();
     return { success: true, filepath: result.filepath };
   } catch (err) {
@@ -592,7 +617,7 @@ ipcMain.handle('recording:start', async () => {
 ipcMain.handle('recording:stop', async () => {
   try {
     const result = await recorder.stop();
-    tray.setTitle('🎙️');
+    tray.setTitle('🤖✏️');
     updateTrayMenu();
 
     // Auto-process if enabled
@@ -918,7 +943,7 @@ app.whenReady().then(() => {
   // Run cleanup on startup
   runCleanup();
 
-  console.log('Meeting Recorder ready. Click the menu bar icon to start recording.');
+  console.log('Notes4Me ready. Click the menu bar icon to start recording.');
 
   // Show welcome message if dependencies are missing
   if (!deps.sox || !deps.whisper) {
@@ -988,7 +1013,7 @@ if (!gotTheLock) {
     // Focus the tray or show a notification
     if (tray) {
       tray.displayBalloon({
-        title: 'Meeting Recorder',
+        title: 'Notes4Me',
         content: 'Already running in menu bar'
       });
     }
