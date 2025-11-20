@@ -19,7 +19,7 @@
     "summarisation"
   ],
   "author": "Andy Jarrett",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
     "electron-store": "^8.2.0"
   },
