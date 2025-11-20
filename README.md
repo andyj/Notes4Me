@@ -940,7 +940,7 @@ cd whisper.cpp
 
 ### Summarisation
 
-**Q: Can I customize the summary format?**
+**Q: Can I customise the summary format?**
 A: Yes! Edit the prompt in `services/summariser.js` (line ~60) to change the structure, add custom sections, or adjust tone.
 
 **Q: Can I use a different AI model?**
