@@ -83,43 +83,21 @@ async function generateNotes(transcriptPath, progressCallback) {
   console.log(`Output will be saved to: ${outputPath}`);
 
   // Craft prompt for structured note generation
-  const prompt = `You are a meeting notes assistant. Generate structured notes from this transcript following this EXACT format:
+  const prompt = `You create clear and structured meeting notes. Read the transcript and produce well-organised notes with accurate detail and concise wording. Infer the meeting date if it’s mentioned or implied.
 
-# Meeting Notes - [Infer Date if Possible]
+Use the following sections when they apply:
 
-## Action Items
-+ [Owner/Person]: [Specific action to take]
-+ [Owner/Person]: [Another action item]
+Meeting Notes [Include inferred date]
+Action Items
+Meeting Purpose
+Key Takeaways
+Topics Discussed
+Problem
+Blocker
+Solution or Proposal
+Next Steps
 
-## Meeting Purpose
-+ [One clear sentence describing the main purpose/goal of the meeting]
-
-## Key Takeaways
-+ [Important point 1]
-+ [Important point 2]
-+ [Important point 3]
-
-## Topics Discussed
-
-### Problem
-[What issue or challenge was discussed]
-[Impact or importance of this problem]
-[Relevant context]
-
-### Blocker
-[What is blocking progress, if any]
-[Technical details if relevant]
-[What has been tried]
-[External dependencies]
-
-### Solution / Proposal
-[Recommended approach or path forward]
-[Reasoning behind the recommendation]
-[Trade-offs or considerations]
-
-## Next Steps
-+ [Name/Team]: [Specific next step with timeline if mentioned]
-+ [Name/Team]: [Another next step]
+Write in plain UK English. Keep each section brief but complete. Do not invent details that aren’t supported by the transcript.
 
 ---
 
